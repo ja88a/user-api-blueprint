@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "name": "@jabba01/tuba-ws-user",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Users Web Service for the TUBA solution - Expose a set of OpenAPIs for managing users and manage their data in the database",
+  "repository": "https://github.com/ja88a/user-api-blueprint.git",
+  "author": "Jabba ø1 (@ja88a)",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "main": "dist/index",
+  "scripts": {
+    "build": "nest build",
+    "build:tsc": "tsc -p tsconfig.build.json",
+    "start": "dotenv -e ../../.env.local -- nest start",
+    "start:prod": "node dist/main",
+    "watch": "tsc --watch",
+    "watch:start": "dotenv -e ../../.env.local -- nest start --watch",
+    "watch:start:debug": "dotenv -e ../../.env.local -- nest start --debug --watch",
+    "format": "prettier -l --write \"{src,apps,libs,test}/**/*.{md,ts,json}\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "clean": "shx rm -rf node_modules && shx rm -rf .turbo && shx rm -rf dist",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "dotenv -e ../../.env.local jest --config ./test/jest-e2e.json",
+    "db:init:local": "pnpm db:create:local && pnpm db:migrate:local",
+    "db:create:local": "dotenv -e ../../.env.local -- cross-var createdbjs tuba-user --host=%DATABASE_HOST_NAME% --port=%DATABASE_HOST_PORT% --user=%DATABASE_USER_NAME% --password=%DATABASE_USER_PWD%",
+    "db:generate:local": "dotenv -e ../../.env.local -- drizzle-kit generate --out ./migration-local",
+    "db:migrate:local": "dotenv -e ../../.env.local -- drizzle-kit push",
+    "db:studio:local": "dotenv -e ../../.env.local -- drizzle-kit studio"
+  },
+  "dependencies": {
+    "@jabba01/tuba-dc-database-client": "workspace:*",
+    "@jabba01/tuba-lib-utils-common": "workspace:*",
+    "@jabba01/tuba-lib-utils-data": "workspace:*",
+    "@jabba01/tuba-lib-utils-ws": "workspace:*",
+    "@nestjs/common": "^10.4.15",
+    "@nestjs/config": "^3.3.0",
+    "@nestjs/core": "^10.4.15",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/platform-express": "^10.4.15",
+    "@nestjs/swagger": "^8.1.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "drizzle-orm": "^0.30.10",
+    "nest-winston": "^1.9.7",
+    "pg": "^8.13.1",
+    "postgres": "^3.4.5",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.4.9",
+    "@nestjs/schematics": "^10.2.3",
+    "@nestjs/testing": "^10.4.15",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/lib-config-typescript": "workspace:*",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.10",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "dotenv-cli": "^7.4.4",
+    "drizzle-kit": "^0.21.4",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.4.2",
+    "source-map-support": "^0.5.21",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
