@@ -1,0 +1,130 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalDependencies": [
+    "**/.env.sample"
+  ],
+  "globalEnv": [
+    "NODE_ENV",
+    "OPENAPI_ENABLED",
+    "OPENAPI_CLIENT_GENERATOR",
+    "OPENAPI_CLIENT_OUTDIR",
+    "PORT",
+    "API_PORT",
+    "DATABASE_DB_NAME",
+    "DATABASE_ENDPOINT",
+    "API_URI_PREFIX",
+    "API_VERSION_NUMBER"
+  ],
+  "globalPassThroughEnv": [
+    "GITHUB_TOKEN",
+    "DATABASE_USER_NAME",
+    "DATABASE_USER_PWD"
+  ],
+  "tasks": {
+    "repo:init": {
+      "dependsOn": [
+        "^repo:init"
+      ]
+    },
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".nest/**",
+        "!.nest/cache/**",
+        "dist/**"
+      ],
+      "outputLogs": "new-only"
+    },
+    "build:tsc": {
+      "dependsOn": [
+        "^build:tsc"
+      ],
+      "outputs": [
+        "dist/**"
+      ],
+      "outputLogs": "new-only"
+    },
+    "lint": {
+      "dependsOn": [
+        "^lint"
+      ],
+      "outputLogs": "new-only"
+    },
+    "format": {
+      "dependsOn": [
+        "^format"
+      ],
+      "outputLogs": "new-only"
+    },
+    "watch": {
+      "dependsOn": [
+        "^watch"
+      ],
+      "cache": true,
+      "persistent": false
+    },
+    "clean": {
+      "cache": false
+    },
+    "db:create:local": {
+      "cache": false
+    },
+    "db:create:dev": {
+      "cache": false
+    },
+    "db:create:staging": {
+      "cache": false
+    },
+    "db:create:prod": {
+      "cache": false
+    },
+    "db:migrate:local": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "db:migrate:dev": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "db:migrate:staging": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "db:migrate:prod": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "db:generate:local": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "db:generate:dev": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "db:generate:staging": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "db:generate:prod": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "turbo:test": {
+      "dependsOn": [
+        "^turbo:test"
+      ]
+    }
+  }
+}

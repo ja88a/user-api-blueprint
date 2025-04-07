@@ -1,0 +1,35 @@
+name: Build All
+on:
+  push:
+  pull_request:
+    branches:
+      - develop
+      - staging
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v3
+
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9.1
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+
+    - name: Install all workspace package dependencies
+      run: pnpm install
+          
+    - name: Build all workspace packages
+      run: pnpm build
