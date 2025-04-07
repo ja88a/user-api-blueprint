@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "name": "@jabba01/tuba-api-client-aio",
+  "version": "0.0.1",
+  "private": false,
+  "description": "OpenAPI Client of the TUBA Web Services.\nExpose methods to trigger http/json data requests towards exposed REST APIs.",
+  "author": "Jabba ø1 (@ja88a)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ja88a/user-api-blueprint.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "nest build --config=tsconfig.build.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:prod": "pnpm build && webpack --config webpack.config.js",
+    "watch": "tsc --watch",
+    "update:postprocess": "pnpm format && pnpm lint && pnpm build && shx rm -rf ./src-prev",
+    "publish:pkg": "pnpm build && npm publish && pnpm version:patch",
+    "publish:pkg:dry": "pnpm build && npm publish --dry-run",
+    "version:patch": "npm version --no-git-tag-version patch",
+    "format": "prettier -l --write \"{src,apps,libs,test}/**/*.{ts,md,json}\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "clean": "shx rm -rf node_modules && shx rm -rf .turbo && shx rm -rf dist",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "devDependencies": {
+    "@jabba01/tuba-lib-utils-ws": "workspace:*",
+    "@nestjs/schematics": "^10.2.3",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/lib-config-typescript": "workspace:*",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.2",
+    "webpack": "^5.97.1",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}

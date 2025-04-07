@@ -1,0 +1,9 @@
+.*
+_*
+src*
+test*
+jest*
+nest*
+#README.md
+tsconfig*.json
+webpack.config.js

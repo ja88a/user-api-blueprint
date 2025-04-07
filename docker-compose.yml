@@ -1,0 +1,84 @@
+volumes:
+  db_data:
+    driver: local
+  cache_data:
+    driver: local
+  tuba_data: {}
+  fusionauth_config:
+  search_data:
+
+networks:
+  tuba_net:
+    driver: bridge
+  db_net:
+    driver: bridge
+  search_net:
+    driver: bridge
+  mailcatcher_net:
+    driver: bridge
+
+services:
+
+  tuba-postgres:
+    container_name: tuba-postgres
+    image: postgres:16.2
+    ports:
+      - 5432:5432
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: tubadev
+      POSTGRES_PASSWORD: test1234
+      POSTGRES_DB: tuba
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - db_data:/var/lib/postgresql/data:rw
+    networks:
+      - db_net
+    restart: unless-stopped
+
+  tuba-server-aio:
+    container_name: tuba-server-aio
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: tuba-server-aio-prod
+      args:
+        - GITHUB_TOKEN=${GITHUB_TOKEN}
+        - DOCKER_IMG_NAME=tuba-server-aio
+        - DOCKER_IMG_TAG=latest
+        - PORT=${API_PORT}
+        - PROJECT_PACKAGE=@jabba01/tuba-server-aio
+        - PROJECT_PATH=apps/tuba-server-aio
+    depends_on:
+      - tuba-postgres
+    ports:
+      - ${API_PORT}:${API_PORT}
+      - 5001:5001
+    environment:
+      API_PORT: ${API_PORT}
+      API_URI_PREFIX: tuba-api
+      NODE_ENV: ${NODE_ENV}
+      ENVIRONMENT: ${ENVIRONMENT}
+      ENV_DOMAIN: ${ENV_DOMAIN}
+      LOG_LEVEL: ${LOG_LEVEL}
+      OPENAPI_ENABLED: ${OPENAPI_ENABLED}
+      DATABASE_USER_NAME: ${DATABASE_USER_NAME}
+      DATABASE_USER_PWD: ${DATABASE_USER_PWD}
+      DATABASE_ENDPOINT: tuba-postgres:5432
+      # DATABASE_DB_NAME: tuba
+      JWT_SECRET: test1234
+    healthcheck:
+      interval: 20s
+      retries: 3
+      test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:${API_PORT}/tuba-api/health
+    volumes:
+      - tuba_data:/tuba/data:rw
+    networks:
+      - tuba_net
+      - db_net
+    restart: unless-stopped
+

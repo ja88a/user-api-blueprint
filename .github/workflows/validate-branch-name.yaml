@@ -1,0 +1,13 @@
+name: 'Assert Branch Naming Convention'
+on: pull_request
+
+jobs:
+  branch-naming-rules:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: deepakputhraya/action-branch-name@master
+        with:
+          regex: 'TUBA-[0-9]+-.+' # Regex the branch should match.
+          ignore: main,staging,develop    # Ignore exactly matching branch names from convention
+          min_length: 8   # Min length of the branch name
+          max_length: 80  # Max length of the branch name
