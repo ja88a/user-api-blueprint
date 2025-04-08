@@ -124,11 +124,50 @@ Run the all-in-one server in a Docker container, via docker-compose:
 pnpm docker:up:local
 ```
 
+### Run Tests
+
+Running tests against the Users management web service:
+
+```sh
+packages/user/ $ pnpm test
+```
+
+Note: The Database is mocked in this testing mode.
+
+### Run E2E Tests
+
+In order to run end-to-end tests, from the API Client against the locally running Users web service (and the database)
+
+Ensure the DB is running using docker-compose: `pnpm db:start:local`.
+And your app server is locally running using `pnpm start` or `pnpm start:user`.
+
+Alternatively you can run all servers locally using Docker: `pnpm docker:up:local`.
+
+You can then trigger the E2E tests, located in dir [`test-e2e`](./test-e2e/):
+
+```sh
+test-e2e/ $ pnpm test 
+```
+
 ### API Endpoint Specifications
 
 When running the app server, or a single web service, with `NODE_ENV` not set to `production`, the OpenAPI Swagger UI is available under URI [/tuba-api](http://localhost:3000/tuba-api).
 
 OpenAPI specifications are also available in the [`yaml`](http://localhost:3000/tuba-api-yaml) and [`json`](http://localhost:3000/tuba-api-json) formats.
+
+The app server must be running to access the Swagger web UI.
+
+### Exploring the DB
+
+A locally running Drizzle Studio web UI is available for exploring the web service Database and managing its entries.
+
+Command for running the DB explorer:
+
+```sh
+packages/user/ $ pnpm db:studio:local
+```
+
+Then locally navigate to [local.drizzle.studio](https://local.drizzle.studio) using your web browser.
 
 ## Tools
 
