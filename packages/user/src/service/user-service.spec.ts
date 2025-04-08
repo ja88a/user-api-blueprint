@@ -1,14 +1,11 @@
-import {
-  BadRequestException,
-  InternalServerErrorException,
-} from '@jabba01/tuba-lib-utils-ws'
+import { BadRequestException } from '@jabba01/tuba-lib-utils-ws'
 import { Test, TestingModule } from '@nestjs/testing'
 import { UserDatastoreService } from '../database'
 import { UserDatastoreServiceMock } from '../database/test/user-ds.mock-service'
 import { UserService } from '../service/user.service'
 import { UserServiceModule } from './user-service.module'
 import { USERS_1 } from '../database/test/user-ds.mock-data'
-import { ESubService, IRequestContext } from '@jabba01/tuba-lib-utils-data'
+import { IRequestContext } from '@jabba01/tuba-lib-utils-data'
 import { EUserAccountType, TUser, TUserIdentifier, TUserNew } from '../data'
 
 describe('UserService', () => {
@@ -147,7 +144,7 @@ describe('UserService', () => {
         },
       ],
     }
-    
+
     let userCreatedRes: TUser
 
     it('should successfully create a new user', async () => {
@@ -192,9 +189,12 @@ describe('UserService', () => {
     //   expect(user).toBeDefined()
     // })
 
-    it ('should retrieve the previously created user from its ID', async () => {
-        const user = await userService.getUserById(userCreatedRes.id, DefaultRequestContext)
-        expect(user).toBeDefined
+    it('should retrieve the previously created user from its ID', async () => {
+      const user = await userService.getUserById(
+        userCreatedRes.id,
+        DefaultRequestContext,
+      )
+      expect(user).toBeDefined
     })
 
     it('should fail to add a user with same email address', async () => {

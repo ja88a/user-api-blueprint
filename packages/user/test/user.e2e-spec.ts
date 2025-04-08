@@ -28,6 +28,9 @@ describe('UserController (e2e)', () => {
   })
 
   it('/tuba-api/v1/users/health (GET)', () => {
-    return request(app.getHttpServer()).get('/tuba-api/v1/users/health').expect(200).expect('Hello World!')
+    return request(app.getHttpServer())
+      .get('/tuba-api/v1/users/health')
+      .expect(200)
+      .expect('Hello World!')
   })
 })

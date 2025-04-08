@@ -45,11 +45,9 @@ import {
   UserNewDto,
   UserSearchFilterDto,
   UserSearchResultDto,
-  UserUpdDto
+  UserUpdDto,
 } from './dto'
-import {
-  convertUserToDto
-} from './dto/convert-user-dto.utils'
+import { convertUserToDto } from './dto/convert-user-dto.utils'
 
 /**
  * Controller for the Template WebService
@@ -282,8 +280,7 @@ export class UserController {
   @Post()
   @ApiOperation({
     summary: 'Create User',
-    description:
-      'Create a new user profile, by providing the required information.',
+    description: 'Create a new user profile, by providing the required information.',
   })
   // TODO @ApiBearerAuth()
   @ApiCreatedResponse({
@@ -319,7 +316,6 @@ export class UserController {
 
     return convertUserToDto(userCreated, true)
   }
-
 
   @Patch(':id')
   @ApiOperation({

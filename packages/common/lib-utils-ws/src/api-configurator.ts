@@ -55,9 +55,7 @@ async function handleOpenAPI(app: INestApplication): Promise<void> {
       app,
       new DocumentBuilder()
         .setTitle('TUBA API')
-        .setDescription(
-          'TUBA by Jabba ø1 - OpenAPI',
-        )
+        .setDescription('TUBA by Jabba ø1 - OpenAPI')
         .setVersion(WS_CONFIG.VERSION_PUBLIC + '.0')
         .setContact(
           'Jabba ø1 (@ja88a)',
@@ -66,10 +64,7 @@ async function handleOpenAPI(app: INestApplication): Promise<void> {
         )
         .setExternalDoc('TUBA Documentation', 'https://docs.none.com/')
         .addServer('http://localhost:3000/' + WS_CONFIG.URI_DOMAIN_API, 'local dev')
-        .addServer(
-          'https://dev.none.com/' + WS_CONFIG.URI_DOMAIN_API,
-          'development',
-        )
+        .addServer('https://dev.none.com/' + WS_CONFIG.URI_DOMAIN_API, 'development')
         .addBearerAuth({
           description: 'JWT token to access APIs requiring authentication',
           type: 'http',
@@ -101,7 +96,8 @@ async function handleOpenAPI(app: INestApplication): Promise<void> {
         },
         fileGeneratorOptions: {
           enabled: WS_TOOLS_CONFIG.OPENAPI_CLIENT_GENERATOR && !IS_NODE_PROD,
-          outputFilePath: WS_TOOLS_CONFIG.OPENAPI_CLIENT_OUTDIR + 'tuba-openapi.yaml', // or .json
+          outputFilePath:
+            WS_TOOLS_CONFIG.OPENAPI_CLIENT_OUTDIR + 'tuba-openapi.yaml', // or .json
         },
         clientGeneratorOptions: {
           enabled: WS_TOOLS_CONFIG.OPENAPI_CLIENT_GENERATOR && !IS_NODE_PROD,

@@ -1,8 +1,4 @@
-import {
-  TUser,
-  TUserAccount,
-  obfuscateUserIdentifier,
-} from '../../data'
+import { TUser, TUserAccount, obfuscateUserIdentifier } from '../../data'
 import { UserAccountDto, UserDto } from '.'
 
 export const convertUserAccountsToDto = (

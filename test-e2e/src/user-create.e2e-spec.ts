@@ -21,7 +21,7 @@ describe('User Create (e2e)', () => {
 
   let userNew: UserDto
   const newUserName = 'Test User ' + new Date().toISOString()
-  const newUserEmail = 'test.user'+getRandomInt(1000, 100000)+'@test-e2e.com'
+  const newUserEmail = 'test.user' + getRandomInt(1000, 100000) + '@test-e2e.com'
 
   beforeAll(async () => {
     await testSessionHelper.initApiService(apiService)
@@ -80,7 +80,7 @@ describe('User Create (e2e)', () => {
     })
     expect(userNew).toBeDefined()
     expect(userNew.id).toBeGreaterThan(0)
-    
+
     // Track for later removal from the DB
     testSessionHelper.addUsersCreated([userNew.id])
 
@@ -106,7 +106,7 @@ describe('User Create (e2e)', () => {
   it(`should Get the newly created user by its ID`, async () => {
     const userGetResult = await apiService.apis.users
       .getUserById({
-        id: userNew.id
+        id: userNew.id,
       })
       .catch(async (err): Promise<UserDto> => {
         const errBody = await err.response?.json()
@@ -156,17 +156,19 @@ describe('User Create (e2e)', () => {
   it(`should prevent Creating a New User with an already registered email`, async () => {
     expect(userNew).toBeDefined()
 
-    await expect(apiService.apis.users.createUser({
-      userNewDto: {
-        name: newUserName,
-        account: [
-          {
-            identifier: newUserEmail,
-            type: UserAccountNewDtoTypeEnum.Email,
-          },
-        ],
-      },
-    })).rejects.toThrow()
+    await expect(
+      apiService.apis.users.createUser({
+        userNewDto: {
+          name: newUserName,
+          account: [
+            {
+              identifier: newUserEmail,
+              type: UserAccountNewDtoTypeEnum.Email,
+            },
+          ],
+        },
+      }),
+    ).rejects.toThrow()
   })
 
   // it(`Get New User w/ non-registered Account`, async () => {

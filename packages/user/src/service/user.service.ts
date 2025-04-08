@@ -25,7 +25,7 @@ import {
   TUserSearchFilter,
   UserAccountStatusDefault,
   UserStatusDefault,
-  UserTypeDefault
+  UserTypeDefault,
 } from '../data'
 import { UserDatastoreService } from '../database'
 
@@ -144,7 +144,7 @@ export class UserService {
 
   /**
    * Retrieve a user by its sub-account identifier.
-   * 
+   *
    * @param account user sub-account associated to the user
    * @returns the users info, can be multiple if the sub-account is shared
    */
@@ -178,7 +178,7 @@ export class UserService {
 
     return users?.[0]
   }
-  
+
   /**
    * Extract the user IDs from the provided user identifiers, get the information from the data store if required.
    *
@@ -480,5 +480,4 @@ export class UserService {
   //
   // User Sub-Accounts management
   //
-
 }

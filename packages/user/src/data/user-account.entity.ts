@@ -1,4 +1,4 @@
-import { EUserAccountStatus, EUserAccountType } from "./user-constants"
+import { EUserAccountStatus, EUserAccountType } from './user-constants'
 
 /**
  * Supported means to identify a user account.

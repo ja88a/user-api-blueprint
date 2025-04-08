@@ -25,8 +25,7 @@ export class UserDatastoreServiceMock implements IUserDatastoreService {
   }
 
   async retrieveUsersById(ids: number[]): Promise<TUser[]> {
-    if (!(ids?.length > 0))
-      return []
+    if (!(ids?.length > 0)) return []
     return ids.map((id) => USERS_1.get(id)).filter((user) => user?.id > 0)
   }
 

@@ -146,7 +146,7 @@ Alternatively you can run all servers locally using Docker: `pnpm docker:up:loca
 You can then trigger the E2E tests, located in dir [`test-e2e`](./test-e2e/):
 
 ```sh
-test-e2e/ $ pnpm test 
+test-e2e/ $ pnpm test
 ```
 
 ### API Endpoint Specifications

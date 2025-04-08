@@ -1,6 +1,4 @@
-import {
-  UserDto
-} from '@jabba01/tuba-api-client-aio'
+import { UserDto } from '@jabba01/tuba-api-client-aio'
 import { logger as loggerW } from '@jabba01/tuba-lib-utils-common'
 import { ApiService } from './ApiClient.helper'
 import { extractErrorMsg } from './TestUtils'
@@ -20,9 +18,7 @@ export class TestSessionHelper {
    * @param userCreds optional user credentials specification to use for authentication
    * @returns
    */
-  async initApiService(
-    apiService: ApiService,
-  ): Promise<void> {
+  async initApiService(apiService: ApiService): Promise<void> {
     logger.debug(`${apiService ? 'Reusing' : 'Creating'} ApiService`)
 
     if (apiService) this.apiService = apiService

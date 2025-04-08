@@ -1,8 +1,8 @@
 import {
-    EUserAccountStatus,
-    EUserAccountType,
-    EUserStatus,
-    UserTypeDefault
+  EUserAccountStatus,
+  EUserAccountType,
+  EUserStatus,
+  UserTypeDefault,
 } from '../../data/user-constants'
 import { TUser, TUserNew } from '../../data/user.entity'
 
@@ -39,6 +39,6 @@ for (let i = 0; i < USERS_SET_SIZE; i++) {
       },
     ],
     status: EUserStatus.VALID,
-    handle: 'jane'+i+'#000' + i,
+    handle: 'jane' + i + '#000' + i,
   })
 }
