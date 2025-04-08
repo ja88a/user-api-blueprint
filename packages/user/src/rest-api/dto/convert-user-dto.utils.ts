@@ -1,13 +1,9 @@
-import {
-  TUser,
-  TUserAccount,
-  obfuscateUserIdentifier,
-} from '../../data'
+import { TUser, TUserAccount, obfuscateUserIdentifier } from '../../data'
 import { UserAccountDto, UserDto } from '.'
 
 export const convertUserAccountsToDto = (
   accounts: TUserAccount[],
-  withDetails?: boolean,
+  _withDetails?: boolean,
 ): UserAccountDto[] => {
   if (!accounts) return undefined
 
@@ -19,7 +15,7 @@ export const convertUserAccountsToDto = (
       type: account.type,
       default: account.default,
 
-      identifier: withDetails
+      identifier: true // TODO reinforce `withDetails` once user auth/role is integrated
         ? account.identifier
         : obfuscateUserIdentifier(account.type, account.identifier),
       name: account.name,

@@ -1,12 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
+import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
-import { UserModule } from '../src/rest-api'
-import { UserDatastoreModule, UserDatastoreService } from '../src/database'
-import { UserService, UserServiceModule } from '../src/service'
+import { UserDatastoreService } from '../src/database'
 import { UserDatastoreServiceMock } from '../src/database/test/user-ds.mock-service'
+import { UserModule } from '../src/rest-api'
 
-describe('AppController (e2e)', () => {
+describe('UserController (e2e)', () => {
   let app: INestApplication
   let userDatastoreMock = new UserDatastoreServiceMock()
 
@@ -25,10 +24,13 @@ describe('AppController (e2e)', () => {
   })
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer()).get('/').expect(404).expect('Hello World!')
+    return request(app.getHttpServer()).get('/').expect(404)
   })
 
   it('/tuba-api/v1/users/health (GET)', () => {
-    return request(app.getHttpServer()).get('/tuba-api/v1/users/health').expect(200).expect('Hello World!')
+    return request(app.getHttpServer())
+      .get('/tuba-api/v1/users/health')
+      .expect(200)
+      .expect('Hello World!')
   })
 })

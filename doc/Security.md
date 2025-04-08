@@ -36,7 +36,7 @@ Reference documentations:
 
 **MISSING**: No user authentication is actually implemented
 
- _TO BE IMPLEMENTED_
+_TO BE IMPLEMENTED_
 
 ## Misc measures
 

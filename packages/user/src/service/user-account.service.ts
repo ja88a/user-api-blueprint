@@ -1,7 +1,4 @@
-import {
-  IConflict,
-  IRequestContext
-} from '@jabba01/tuba-lib-utils-data'
+import { IConflict, IRequestContext } from '@jabba01/tuba-lib-utils-data'
 import {
   BadRequestException,
   InternalServerErrorException,
@@ -14,7 +11,7 @@ import {
   TUserAccountIdentifier,
   TUserAccountNew,
   TUserIdentifier,
-  UserAccountStatusDefault
+  UserAccountStatusDefault,
 } from '../data'
 import { UserDatastoreService } from '../database'
 import { UserService } from './user.service'
@@ -29,7 +26,7 @@ export class UserAccountService {
 
   /**
    * Extract the user IDs from the user role grant request.
-   * 
+   *
    * If the user ID is not provided, the account address is used to retrieve the user ID.
    * If the user does not exist, a new dummy/default user is created in the User domain.
    *
@@ -47,12 +44,14 @@ export class UserAccountService {
     }
 
     // Look up for the target user
-    const userTarget = await this.userService.getUser(userIdentifier, context).catch((err) => {
-      throw BadRequestException.INVALID_INPUT(
-        `User Lookup aborted - Failed to search for user with identifier '${JSON.stringify(userIdentifier)}'`,
-        err,
-      )
-    })
+    const userTarget = await this.userService
+      .getUser(userIdentifier, context)
+      .catch((err) => {
+        throw BadRequestException.INVALID_INPUT(
+          `User Lookup aborted - Failed to search for user with identifier '${JSON.stringify(userIdentifier)}'`,
+          err,
+        )
+      })
 
     if (userTarget) {
       // User exists
@@ -75,22 +74,24 @@ export class UserAccountService {
 
       // Create a new dummy user account based on the communicated wallet address only
       // TODO @User account reconciliation on users' web2 signup
-      return await this.userService.createUser(
-        {
-          account: [
-            {
-              identifier: userIdentifier.accountRef.identifier,
-              type: EUserAccountType.WALLET,
-            },
-          ],
-        },
-        context,
-      ).catch((err) => {
-        throw InternalServerErrorException.INTERNAL_SERVER_ERROR(
-          `Failed to create new User from sub-account '${JSON.stringify(userIdentifier.accountRef)}'`,
-          err,
+      return await this.userService
+        .createUser(
+          {
+            account: [
+              {
+                identifier: userIdentifier.accountRef.identifier,
+                type: EUserAccountType.WALLET,
+              },
+            ],
+          },
+          context,
         )
-      })
+        .catch((err) => {
+          throw InternalServerErrorException.INTERNAL_SERVER_ERROR(
+            `Failed to create new User from sub-account '${JSON.stringify(userIdentifier.accountRef)}'`,
+            err,
+          )
+        })
     }
   }
 

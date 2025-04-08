@@ -1,6 +1,4 @@
-import {
-  ResponseError,
-} from '@jabba01/tuba-api-client-aio'
+import { ResponseError } from '@jabba01/tuba-api-client-aio'
 
 /**
  * Returns a random integer between min (inclusive) and max (inclusive).

@@ -1,11 +1,5 @@
-import {
-  Configuration,
-  HTTPHeaders,
-  UsersApi
-} from '@jabba01/tuba-api-client-aio'
-import {
-  BASE_PATH
-} from './Test.constant'
+import { Configuration, HTTPHeaders, UsersApi } from '@jabba01/tuba-api-client-aio'
+import { BASE_PATH } from './Test.constant'
 
 import { logger as loggerW } from '@jabba01/tuba-lib-utils-common'
 

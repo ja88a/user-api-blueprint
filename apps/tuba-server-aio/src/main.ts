@@ -46,8 +46,6 @@ async function bootstrap(): Promise<void> {
 }
 
 bootstrap().catch((err) => {
-  loggerApp.error(
-    `Failed to bootstrap tuba-server-aio \n${err.stack ?? err}`,
-  )
+  loggerApp.error(`Failed to bootstrap tuba-server-aio \n${err.stack ?? err}`)
   process.exit(1)
 })

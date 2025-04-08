@@ -1,12 +1,10 @@
-import {
-  EServiceName
-} from '@jabba01/tuba-lib-utils-data'
+import { EServiceName } from '@jabba01/tuba-lib-utils-data'
 import {
   AuthReq,
   BadRequestException,
   InternalServerErrorException,
   UnauthorizedException,
-  WS_CONFIG
+  WS_CONFIG,
 } from '@jabba01/tuba-lib-utils-ws'
 import {
   Body,
@@ -15,7 +13,7 @@ import {
   Logger,
   Param,
   Post,
-  Request
+  Request,
 } from '@nestjs/common'
 import {
   ApiBadRequestResponse,
@@ -26,17 +24,12 @@ import {
   ApiOperation,
   ApiParam,
   ApiTags,
-  ApiUnauthorizedResponse
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger/dist/decorators'
 import { API_TAG_USERS, EUserFlow } from '../data'
 import { UserAccountService } from '../service/user-account.service'
 import { UserService } from '../service/user.service'
-import {
-  UserAccountDto,
-  UserAccountIdDto,
-  UserAccountNewDto,
-  UserDto
-} from './dto'
+import { UserAccountDto, UserAccountIdDto, UserAccountNewDto, UserDto } from './dto'
 import {
   convertUserAccountsToDto,
   convertUserToDto,
