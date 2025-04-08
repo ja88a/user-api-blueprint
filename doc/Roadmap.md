@@ -8,21 +8,21 @@ The objective of this high-level software development roadmap is to iteratively 
 
 ### Development framework
 
-* Mono-repository approach for grouping the development & management of potentially many micro-services
-* Implement basic CRUD operations for managing user & sub-accounts data.
-* Modularity
+* Mono-repository approach for grouping the development & management of potentially many micro-services - **DONE**
+* Implement basic CRUD operations for managing user & sub-accounts data - **DONE**
+* Modularity - **DONE**
   * business domain driven isolation of web services' functional scope
   * each web services embeds its API controllers, services, data models & persistence layer (Postgres DB via Drizzle ORM)
   * reuse across web services of developed utility libraries, config and data models via package dependencies
   * reuse of owned or external modules via import & injection: controllers, services & data connectors
 * OpenAPI specification support: Swagger web doc & API Client generation
-* Tests
-  * database mocking
-  * unit tests framework + samples
-  * integration tests
-  * end-to-end tests from the API Client
+* Tests  - **Partially DONE**
+  * database mocking - **DONE**
+  * unit tests framework + samples - **DONE**
+  * integration tests - **DONE**
+  * end-to-end tests from the API Client - **DONE**
   * workload tests to audit & optimize
-* Multiple environments integration: local & remote development, staging & prod platforms
+* Multiple environments integration: local & remote development, staging & prod platforms - **DONE**
 * Functional improvements
   * pagination support for returned results
 
@@ -34,8 +34,8 @@ The objective of this high-level software development roadmap is to iteratively 
   * SIWE protocol integration for wallet signature-based authentication of users
   * Integration of a blockchain-based DID solution
 * Protect the users management API endpoints
-  * Enable actual API Auth Bearer support based on JWT Authorization header
-  * Requests input validation: strong typing and constrained value support (length, pattern, etc)
+  * Enable actual API Auth Bearer support based on JWT Authorization header - **Partially DONE**
+  * Requests input validation: strong typing and constrained value support (length, pattern, etc) - **DONE**
   * Sanitization of input values
   * CSRF protection to protect the forgery of client submitted data
 * Multi-tenancy support
@@ -43,14 +43,14 @@ The objective of this high-level software development roadmap is to iteratively 
   * Develop or integrate with a web service handling customer or product-related tenant support
 * User Roles management and permissions, with multi-tenancy support
 * Encryption of the sensitive user data at rest, in the database
-* Outputs validation, pruning and/or obfuscation of sensitive data in responses
+* Outputs validation, pruning and/or obfuscation of sensitive data in responses - **DONE**
 
 ### Databases management
 
-* Init & config
-* Automation: init, start, stop & reset scripts
-* Generate & migrate DB schema
-* VPN-based access to remote databases & tools integration
+* Init & config - **DONE**
+* Automation: init, start, stop & reset scripts - **DONE**
+* Generate & migrate DB schema - **DONE**
+* VPN-based access to remote databases & tools integration - **DONE**
 
 ### Data caching
 
@@ -59,7 +59,7 @@ The objective of this high-level software development roadmap is to iteratively 
 
 ### Docker integration
 
-* Docker image build using multi-staging
+* Docker image build using multi-staging - **DONE**
   * docker-compose setup & integration
   * kube setup?
 * Integration of this micro-service by other web services, with an alternative to http REST API calls
@@ -68,17 +68,17 @@ The objective of this high-level software development roadmap is to iteratively 
 
 ### Documentation
 
-* OpenAPI specs & swagger UI
-* framework setup
+* OpenAPI specs & swagger UI - **DONE**
+* framework setup - **DONE**
   * configs
   * install, build & run the server
   * how to setup & run tests locally
   * Git branches & PR management
-* deployments, CI/CD & infra integrations, databases management, security measures
+* deployments, CI/CD & infra integrations, databases management, security measures - **Partially DONE**
 
 ### Releases management
 
-* Resources versioning
+* Resources versioning - **Partially DONE**
   * URI-based versioning & API Gateway integration
   * package versions
   * git tagging
