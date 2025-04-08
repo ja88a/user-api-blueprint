@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserDatastoreService } from './user-ds.service';
-import { UserDatastoreModule } from './user-ds.module';
+import { UserDatastoreService } from '../user-ds.service';
+import { UserDatastoreModule } from '../user-ds.module';
 
 describe('UserDatastoreService', () => {
   let service: UserDatastoreService;

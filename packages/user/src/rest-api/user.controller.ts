@@ -191,7 +191,7 @@ export class UserController {
         throw err
       })
 
-    return convertUserToDto(user, context.userId === user.id)
+    return convertUserToDto(user, true)
   }
 
   @Get(':id')
@@ -409,10 +409,10 @@ export class UserController {
       targetUserId: userId,
       flow: EUserFlow.DELETE,
     }
-    if (userId !== context.userId)
-      throw UnauthorizedException.UNAUTHORIZED_ACCESS(
-        `User '${context.userId}' cannot delete user '${userId}'`,
-      )
+    // if (userId !== context.userId)
+    //   throw UnauthorizedException.UNAUTHORIZED_ACCESS(
+    //     `User '${context.userId}' cannot delete user '${userId}'`,
+    //   )
 
     const userRemoved = await this.userService
       .deleteUser(userId, context)
